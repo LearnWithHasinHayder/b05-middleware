@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\SimpleMiddleware;
 use App\Http\Middleware\CountryMiddleware;
+use App\Http\Middleware\CreditMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,7 +23,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/public', [HomeController::class, 'publicMessage']);
+Route::get('/public', [HomeController::class, 'publicMessage'])->middleware(CreditMiddleware::class);
 // Route::get('/private', [HomeController::class, 'privateMessage'])->middleware(['auth']);
 // Route::get('/secret', [HomeController::class, 'secretMessage'])->middleware('auth');
 
